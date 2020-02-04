@@ -103,7 +103,7 @@ class AuthController {
       user.profile = await user.profile().fetch();
 
       jwt = await auth.withRefreshToken().generate(user, { user });
-      this.welcomeEmail(user);
+      //this.welcomeEmail(user);
       return response.redirect(`${Env.get('APP_URL')}/auth/login/${jwt.token}`);
     } catch (e) {
       console.log(e);
@@ -139,7 +139,7 @@ class AuthController {
     if (res) {
       user = await User.query().where({ email }).first();
       user.profile = await user.profile().fetch();
-      await this.welcomeEmail(user);
+      //await this.welcomeEmail(user);
 
       const result = await auth.withRefreshToken().generate(user, { user });
       await logger('info', 'User Signup', user.id, user.id, user.email);
@@ -220,7 +220,7 @@ class AuthController {
     }
 
     // resend verification
-    await this.welcomeEmail(user);
+    //await this.welcomeEmail(user);
 
     // send response
     await logger('info', 'User Email Verify Link Sent', user.id, user.id, user.email);
